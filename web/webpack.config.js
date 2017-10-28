@@ -35,6 +35,14 @@ module.exports = {
         options: {
           name: '[name].[ext]?[hash]'
         }
+      },{
+        test: /\.scss$/,
+        exclude: /node_modules/,
+        use: ['style-loader', 'css-loader', 'sass-loader']
+      },{ 
+        test: /\.(woff|svg|eot|ttf)\??.*$/,
+        exclude: /node_modules/,
+        loader: 'url-loader?limit=50000&name=[path][name].[ext]'
       }
     ]
   },
