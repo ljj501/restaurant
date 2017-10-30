@@ -3,9 +3,10 @@ import VueRouter from 'vue-router'
 
 import LoginComponent from '../components/login/login.vue'
 import HomeComponent from '../components/home/home.vue'
+import OrderComponent from '../components/order/order.vue'
 import GoodsListComponent from '../components/goodslist/goodslist.vue'
 import GoodsFormComponent from '../components/goodsform/goodsform.vue'
-
+import DetailComponent from '../components/detail/detail.vue'
 Vue.use(VueRouter)
 
 var router = new VueRouter({
@@ -15,13 +16,13 @@ var router = new VueRouter({
 			name: 'home',
 			component: HomeComponent,
 			children: [{
-				path: 'goodslist',
-				name: 'goodslist',
-				component: GoodsListComponent
+				path:'order',
+				name:'order',
+				component:OrderComponent
 			},{
-				path: 'goodsform',
-				name: 'goodsform',
-				component: GoodsFormComponent
+				path:'detail',
+				name:'detail',
+				component:DetailComponent
 			}]
 		},
 		{

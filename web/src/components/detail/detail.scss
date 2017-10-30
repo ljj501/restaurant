@@ -1,0 +1,29 @@
+.content{
+        flex:1;
+        display:flex;
+        overflow:hidden;
+        .navleft{
+            width:2.5rem;
+            ul{
+                height:100%;
+                overflow:auto;
+                li{
+                    background-color:#F5F5F5;
+                    padding:.5rem .3rem;
+                    border-bottom: .025rem solid #ededed;
+                    box-sizing: border-box;
+                    border-left: .1rem solid #f8f8f8;
+                    position: relative;
+                    box-sizing:border-box;
+                }
+                .active{
+                    background-color:#fff;
+                    border-left: .1rem solid #3190e8;
+                }
+            }
+        }
+        .foodslist{
+            flex:1;
+            background:#ccc;
+        }
+}
