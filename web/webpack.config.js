@@ -43,6 +43,13 @@ module.exports = {
         test: /\.(woff|svg|eot|ttf)\??.*$/,
         exclude: /node_modules/,
         loader: 'url-loader?limit=50000&name=[path][name].[ext]'
+      },
+      {
+         test: /\.css$/,
+         use: [ 'style-loader', 'css-loader' ]
+       }, {
+        test: /\.(eot|svg|ttf|woff|woff2)(\?\S*)?$/,
+        loader: 'file-loader'
       }
     ]
   },
