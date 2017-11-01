@@ -41,6 +41,7 @@
     import loading from '../loading/loading.vue'
 	//$children
 	export default {
+<<<<<<< HEAD
 		data:function(){
 			return{
 				dataset:{}
@@ -112,6 +113,14 @@
 		},
 		components: {
             loading
+=======
+		methods: {
+			
+		},
+        mounted:function(){
+            var footer = document.querySelector('.footer');
+            footer.style.display = 'block';  
+>>>>>>> 1195fca86b8d96b64a0ad4d5ba227bd96e78cc70
         }
 	}
 </script>

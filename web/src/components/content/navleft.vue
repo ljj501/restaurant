@@ -43,6 +43,10 @@
         },
         components: {
             loading
+        },
+        mounted:function(){
+            var footer = document.querySelector('.footer');
+            footer.style.display = 'block';  
         }
     }
 </script>
