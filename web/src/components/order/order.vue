@@ -1,5 +1,5 @@
 <template>
-   <div class="content">
+   <div class="t-content">
         <div class="orderlist">
             <div class="carnone" v-show="initStatus">
                 <h3>购物车为空T.T</h3>

@@ -33,20 +33,17 @@
             }
         },
         mounted: function(){
+            console.log(666)
             var self = this;
             http.get({
                 url: self.api,
                 vm:self
             }).then(res => {
-                self.dataset = res.data
+                self.dataset = res.data;
             })
         },
         components: {
             loading
-        },
-        mounted:function(){
-            var footer = document.querySelector('.footer');
-            footer.style.display = 'block';  
         }
     }
 </script>
