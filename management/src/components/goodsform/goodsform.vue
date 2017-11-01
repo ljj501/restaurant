@@ -1,5 +1,6 @@
 <template>
 	<el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+
       <el-form-item label="菜品名称" prop="name" class='z-name'>
             <el-input v-model="ruleForm.name"></el-input>
       </el-form-item>
@@ -10,46 +11,48 @@
         </el-select>
       </el-form-item>
 
-      <el-form-item label="菜品编号" prop="number" class='z-name'>
+      <el-form-item label="菜品编号" prop="number" class='z-price'>
             <el-input :value="ruleForm.number" disabled></el-input>
       </el-form-item>
 
-      <el-form-item label="菜品价格" prop="price" class='z-name'>
+      <el-form-item label="菜品价格" prop="price" class='z-price'>
             <el-input v-model="ruleForm.price" type='number'></el-input>
       </el-form-item>
 
-      <el-form-item label="烹饪时长" prop="time" class='z-name'>
+      <el-form-item label="烹饪时长" prop="time" class='z-price'>
             <el-input v-model="ruleForm.time" type='number'></el-input>
       </el-form-item>
-      
-      <el-form-item label="菜品图片" prop="picture" class='z-name'>
+
           <el-upload
-            class="upload-demo"
-            action="http://jsonplaceholder.typicode.com/posts/"
-            :on-preview="handlePreview"
-            :on-remove="handleRemove"
-            :on-success='handleFiles'
-            list-type="picture">
-            <el-button size="small" type="primary">上传图片</el-button>
-            <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+            class="avatar-uploader"
+            action="https://jsonplaceholder.typicode.com/posts/"
+            :show-file-list="false"
+            :on-success="handleAvatarSuccess"
+            :before-upload="beforeAvatarUpload">
+            <img v-if="imageUrl" :src="imageUrl" class="avatar">
+            <i v-else class="el-icon-plus avatar-uploader-icon"></i>
           </el-upload>
-      </el-form-item>
-      <el-form-item label="创建时间" prop="creatDate" required>
+
+      <el-form-item label="创建时间" prop="creatDate" required  class='z-classify'>
         <el-col :span="8">
           <el-form-item prop="creatDate">
             <el-date-picker type="date" placeholder="创建时间" v-model="ruleForm.creatDate" style="width: 100%;"></el-date-picker>
           </el-form-item>
         </el-col>
       </el-form-item>
-      <el-form-item label="上架" prop="status">
+
+      <el-form-item label="上架" prop="status"  class='z-name'>
         <el-switch v-model="ruleForm.status"></el-switch>
       </el-form-item>
-      <el-form-item>
+
+      <el-form-item  class='z-btn'>
         <el-button type="primary" @click="submitForm('ruleForm')">立即添加</el-button>
         <el-button @click="goBack">返回</el-button>
       </el-form-item>
-    <loading v-show="loadingShow"></loading>
+
+    <!-- <loading v-show="loadingShow"></loading> -->
     </el-form>
+
 </template>
 
 <script>
@@ -87,7 +90,8 @@
             {required: true, message: '烹饪时长不能为空',  trigger: 'blur' }
           ]
         },
-        dishClass:[]
+        dishClass:[],
+        imageUrl:''
       };
     },
     watch:{
@@ -118,7 +122,7 @@
             }
             http.post(opts).then(res => {
                 self.$refs[formName].resetFields();
-                document.querySelector('.el-upload-list').remove();
+                self.imageUrl = '';
                 self.$message({
                       message: '添加菜品成功',
                       type: 'success'
@@ -130,35 +134,41 @@
           }
         });
       },
-      handleRemove(file, filelist) {
-         console.log(file);
-         console.log(filelist);
+      handleAvatarSuccess(res, file) {
+              this.imageUrl = URL.createObjectURL(file.raw);
+              this.ruleForm.picture = URL.createObjectURL(file.raw);
       },
-      handlePreview(file) {
-         console.log(file);
+      beforeAvatarUpload(file) {
+        const isJPG = file.type === 'image/jpeg';
+        const isLt2M = file.size / 1024 / 1024 < 2;
+        if (!isJPG) {
+          this.$message.error('上传头像图片只能是 JPG 格式!');
+        }
+        if (!isLt2M) {
+          this.$message.error('上传头像图片大小不能超过 2MB!');
+        }
+        return isJPG && isLt2M;
       },
-      handleFiles(file, filelist) {
-         this.ruleForm.picture = filelist.url;
-      },
-      goBack(){
-        router.push('/goodslist');
+      goBack:function(){
+          this.$store.state.show = true;
+          router.push('/goodslist');
       },
       showData:function(opts){
-        var self = this;
-        http.post(opts).then(res => {
-            self.dishClass = res.data;
-        })
+          var self = this;
+          http.post(opts).then(res => {
+              self.dishClass = res.data;
+          })
       },
       autoNumber:function(dishClass){
-        var self = this;
-        var opts = {
-            url: 'getDishNumber',
-            vm:this,
-            loading:'loadingShow',
-            params:{
-                classify:dishClass
-            }
-        }
+          var self = this;
+          var opts = {
+              url: 'getDishNumber',
+              vm:this,
+              loading:'loadingShow',
+              params:{
+                  classify:dishClass
+              }
+          }
         http.post(opts).then(res => {
             if(res.data.length>0){
                 self.ruleForm.number =('0' + (res.data[0].number*1 + 1)).slice(-6,6);
@@ -168,5 +178,5 @@
         })
       }
     }
-  }
+  } 
 </script>

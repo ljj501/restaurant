@@ -8,6 +8,8 @@ var bodyparser = require('body-parser');
 
 var dishRouter = require('./dishRouter.js');
 
+var orderRouter = require('./orderRouter.js');
+
 module.exports = {
     allRouter: function(app){
         
@@ -31,5 +33,7 @@ module.exports = {
 
         //菜品管理
         dishRouter.dish(app, db);
+        //订单管理
+        orderRouter.order(app, db);
     }
 }

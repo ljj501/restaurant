@@ -1,3 +1,4 @@
+
 .el-select {
   width: 100px;
 }
@@ -20,5 +21,91 @@
     margin-left:5px;
 }
 .toolbar{
-    margin-bottom:5px;
+    margin-bottom:10px;
+}
+html,body{height:100%;font-style: '微软雅黑';
+font-size: 14px;}
+#app{width: 100%;height:100%;}   
+ul,li,ol,dl,a,span,dt,dd,tr,td,p,h1,h2,h3,h4,body,html,input,button{
+padding: 0;
+margin: 0;
+}
+a{
+text-decoration:none;
+}
+ul,ol,li{
+list-style:none;
+}
+.el-header{
+    color: #333;
+    text-align: center;
+    line-height: 60px;
+    background-color:#E6A20F;//#A3BE1A,#E6A20F
+    .el-breadcrumb{
+        margin-top:20px;
+    }
+}
+
+.el-aside {
+background-color: #495060;
+color: #333;
+text-align: center;
+// min-width:168px;
+.logo{
+    min-height:36px;
+    margin:5% 0 0 10%;
+    width: 80%;
+    line-height:8%;
+    background-color:#2D8CF0;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius:6px;
+    span{
+        font-size:20px;
+        display:block;
+        padding-top:10%;
+        text-align: center;
+        font-weight:bold;
+        color:#fff;
+    }
+}
+ul{
+    margin-top:20px;
+    li{
+    width: 100%;
+    line-height:400%;
+        span,a{
+            font-size:16px;
+            display:line-block;
+            padding-top:6%;
+            text-align: center;
+            font-weight:bold;
+            color:#8A8F99;
+            &:hover{
+                color:#fff;
+            }
+        }
+    }
+}
+}
+
+.el-main {
+background-color: #E9EEF3;
+color: #333;
+text-align: right;
+padding:10px;
+height:530px;
+}
+
+body > .el-container {
+margin-bottom: 40px;
+}
+
+.el-container:nth-child(5) .el-aside,
+.el-container:nth-child(6) .el-aside {
+line-height: 260px;
+}
+
+.el-container:nth-child(7) .el-aside {
+line-height: 320px;
 }

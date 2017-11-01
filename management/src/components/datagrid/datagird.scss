@@ -15,8 +15,26 @@
     padding:0 5px;
 }
 .z-putaway{
-    background-color:#58bc58;padding:5px;
+    background-color:#58bc58;padding:5px;color:#fff;
 }
 .z-outaway{
     background-color:#ccc;padding:5px;
+}
+.has-gutter th{
+    height:45px;background-color:#495060;border-bottom:1px solid #000;text-align:center;color:#fff;
+}
+.block {
+    margin-top:10px;margin-bottom:9px;
+}
+.cell{
+    text-align:center;
+}
+.z-detalis{
+    width:100px;
+}
+.z-nopay{
+    background-color:#f0ad4e;padding:5px;color:#fff;
+}
+.z-pay{
+    background-color:#5cb85c;padding:5px;color:#fff;
 }

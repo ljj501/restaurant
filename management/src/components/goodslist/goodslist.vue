@@ -11,7 +11,7 @@
 		data(){
 			return {
 				props:[
-					{fields:'id',showName:'序号'},
+					{fields:'id',showName:'ID'},
 					{fields:'name',showName:'名字'},
 					{fields:'classify',showName:'品类'},
 					{fields:'number',showName:'编号'},
@@ -20,7 +20,8 @@
 					{fields:'time',showName:'烹饪时长'},
 					{fields:'creatDate',showName:'创建时间'},
 					{fields:'status',showName:'状态'}
-				]
+				],
+				length:['60px', '', '80px', '100px', '90px', '80px', '80px', '120px', '100px','100px']
 			}
 		},
 		props:['search'],

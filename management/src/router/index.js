@@ -5,6 +5,8 @@ import LoginComponent from '../components/login/login.vue'
 import HomeComponent from '../components/home/home.vue'
 import GoodsListComponent from '../components/goodslist/goodslist.vue'
 import GoodsFormComponent from '../components/goodsform/goodsform.vue'
+import SalesOrderComponent from '../components/salesorder/salesorder.vue'
+import OrderdetalisComponent from '../components/orderdetalis/orderdetalis.vue'
 
 Vue.use(VueRouter)
 
@@ -22,6 +24,14 @@ var router = new VueRouter({
 				path: 'goodsform',
 				name: 'goodsform',
 				component: GoodsFormComponent
+			},{
+				path: 'salesorder',
+				name: 'salesorder',
+				component: SalesOrderComponent
+			},{
+				path: 'orderdetalis',
+				name: 'orderdetalis',
+				component: OrderdetalisComponent
 			}]
 		},
 		{

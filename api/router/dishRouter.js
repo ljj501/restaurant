@@ -4,13 +4,14 @@ module.exports = {
         
         //打开时显示
         app.post('/getDish', function(request, response){
-            db.select("select * from dishname limit 10", 'dishname', function(data){
+            var pageSize = 6;
+            db.select(`select * from dishname limit ${pageSize}`, 'dishname', function(data){
                 response.send(data);
             })  
         })
         //分页
         app.post('/getTurnPage', function(request, response){
-            var pageSize = 10;
+            var pageSize = 6;
             if(request.body.findClass){
                 var newData = request.body;
                 var sql = `select * from dishname where ${newData.findClass} regexp '${newData.findContent}' limit ${(newData.pageNumber - 1) * pageSize}, ${pageSize} `;
@@ -63,7 +64,7 @@ module.exports = {
         //探索
         app.post('/searchDish', function(request, response){
             var newData = request.body;
-            var sql = `select * from dishname where ${newData.findClass} regexp '${newData.findContent}' limit 10`;
+            var sql = `select * from dishname where ${newData.findClass} regexp '${newData.findContent}' limit 6`;
             var totalSql = `select count(id) from dishname where ${newData.findClass} regexp '${newData.findContent}'`;
             db.search(totalSql, sql, function(data){
                 response.send(data);
