@@ -8,13 +8,18 @@
                 height:100%;
                 overflow:auto;
                 li{
-                    background-color:#F5F5F5;
-                    padding:.5rem .3rem;
-                    border-bottom: .025rem solid #ededed;
-                    box-sizing: border-box;
-                    border-left: .1rem solid #f8f8f8;
+                   
                     position: relative;
-                    box-sizing:border-box;
+                    a{
+                        display:block;
+                        background-color:#F5F5F5;
+                        padding:.5rem .3rem;
+                        border-bottom: .025rem solid #ededed;
+                        box-sizing: border-box;
+                        border-left: .1rem solid #f8f8f8;
+                        text-decoration:none;
+                        color:#333;
+                    }
                 }
                 .active{
                     background-color:#fff;
@@ -24,6 +29,7 @@
         }
         .foodslist{
             flex:1;
-            background:#ccc;
+            overflow:auto;
+           
         }
 }

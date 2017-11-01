@@ -1,7 +1,8 @@
 <template>
     <div class="navleft">
         <ul >
-            <li v-for="(obj,index) in dataset" :data-main=obj.classify @click="active">{{obj.classify}}</li>
+            <li v-for="(obj,index) in dataset" @click="active">
+            <a :href="'#'+obj.classify">{{obj.classify}}</a></li>
         </ul>
         <loading v-show="loadingShow"></loading>
     </div>
@@ -21,21 +22,24 @@
         props: ['api'],
         methods:{
             active:function(event){
-                var currentLi = event.target;
-                var lis = currentLi.parentNode.children;
+             
+                console.log(event.target)
+                var currentA = event.target;
+                var lis = currentA.parentNode.parentNode.children;
                 for(var i=0;i<lis.length;i++){
-                    lis[i].className='';
+                    lis[i].children[0].className='';
                 }
-                currentLi.className='active';
+                currentA.className='active';
             }
         },
         mounted: function(){
+            console.log(666)
             var self = this;
             http.get({
                 url: self.api,
                 vm:self
             }).then(res => {
-                self.dataset = res.data
+                self.dataset = res.data;
             })
         },
         components: {

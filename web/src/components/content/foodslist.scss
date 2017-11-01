@@ -1,3 +1,100 @@
 .foodslist{
-    
+    overflow:hidden;
+    dl{
+        dt{
+            width:100%;
+            strong{
+                position:relative;
+                display:block;
+                padding:.3rem;
+                font-size: .45rem;
+                color: #666;
+                background-color: #F5F5F5;
+                i{
+                    position:absolute;
+                    right:.2rem;
+                    top:.15rem;
+                    font-style:normal;
+                    font-weight:100;    
+                }
+            }
+            dd{
+                color: #333;
+                margin-bottom: .2rem;
+                background:#fff;
+                padding:.4rem .3rem;
+                font-size: .45rem;
+                font-weight:600;
+                overflow:hidden;
+                h4{width:5.1rem;float:right;}
+                .imgbox{
+                    float: left;
+                    width:1.5rem;
+                    height:1.5rem;
+                    background:#ccc;
+                    margin-right:.3rem;
+                    img{
+                        width:100%;
+                        height:100%;
+                    }
+                }
+                p{
+                    font-size: .25rem;
+                    color: #999;
+                    margin-top:.15rem;
+                    // line-height: .6rem;
+                    font-weight:100;
+                }
+                .pay{
+                    float:left;
+                    font-style:normal;
+                    color: #f60;
+                    margin-top:.3rem;
+                    margin-left:1.7rem;
+                    font-weight:600;
+                }
+                .operate{
+                    float: right;
+                    width:2rem;
+                    .add{
+                        float:right;
+                        width: .5rem;
+                        height: .5rem;
+
+                        border-radius:50%;
+                        background: #3190e8;
+                        font-style:normal;
+                        line-height:.4rem;
+                        text-align:center;
+                        color:#fff;
+                        margin-top:.4rem;
+                    }
+                    span{
+                        display:none;
+                        float: left;
+                        margin-left:.35rem;
+                        margin-top:.35rem;
+                        font-weight:100;
+                        font-size:.4rem;
+                    }
+                    .del{
+                        display:none;
+                        box-sizing:border-box;
+                        float: left;
+                        width: .5rem;
+                        height: .5rem;
+                        border-radius:50%;
+                        font-size:.7rem;
+                        border:1px solid  #3190e8;
+                        font-style:normal;
+                        line-height:.4rem;
+                        text-align:center;
+                        color: #3190e8;
+                        margin-top:.4rem;
+                    }
+                }
+            }
+        }
+    }
+  
 }
