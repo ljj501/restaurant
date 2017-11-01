@@ -4,9 +4,9 @@ var mysql = require('mysql');
 var pool  = mysql.createPool({
   host     : '127.0.0.1',
   user     : 'root',
-  password : '',
+  password : '123456',
   port: 3306,
-  database: 'orderdata'
+  database: 'gg'
 });
 
 
@@ -20,6 +20,15 @@ module.exports = {
               })
           })
   	},
+    //查找菜品数据总数,及开始显示数据
+    orderSelect: function(tsql, tableName, ordercode, callback){
+          pool.query(`select count(id) from ${tableName} where ordercode='${ordercode}'`, function(error, total){
+                  pool.query(tsql, function(error, rows){
+                      data = [total, rows]
+                      callback(data);
+              })
+          })
+    },
     //搜索
     search: function(totalSql, tsql, callback){
           pool.query(totalSql, function(error, total){

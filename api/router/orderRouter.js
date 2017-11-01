@@ -10,7 +10,7 @@ module.exports = {
         //打开订单详情时显示
         app.post('/getOrderDetalis', function(request, response){
             var pageSize = 6;
-            db.select(`select * from orderdetalis limit ${pageSize}`, 'orderdetalis', function(data){
+            db.orderSelect(`select * from orderdetalis where ordercode='${request.body.ordercode}' limit ${pageSize}`, 'orderdetalis', request.body.ordercode, function(data){
                 response.send(data);
             })  
         })

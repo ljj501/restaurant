@@ -10,7 +10,8 @@ Vue.use(Vuex)
 
 var store = new Vuex.Store({
  state: {
-    show:true
+    show:true,
+    orderNo:''
  }
 })
 

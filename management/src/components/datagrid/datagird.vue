@@ -29,7 +29,7 @@
 	    	        @click="handleDelete(scope.$index, scope.row)">{{scope.row.status=='正在卖'?'下架':'恢复'}}</el-button>
 	    	    </div>
 	    	    <div v-else-if="tableName =='saleorder'? true : false">
-	    	    	<el-button type="success" size="mini" class='z-detalis' @click="orderDetalis">查看详情</el-button>
+	    	    	<el-button type="success" size="mini" class='z-detalis' @click="orderDetalis(scope.row.ordercode)">查看详情</el-button>
 	    	    </div>
 	    	    <div v-else-if="tableName =='orderdetalis'? true : false">
 	    	    	<el-button type="success" size="mini" class="z-detalis" @click="confirm(scope.row)" :disabled='scope.row.disable'>下厨</el-button>
@@ -118,6 +118,9 @@
 					vm:this,
 					loading:'loadingShow'
 				}
+			if(this.api == 'getOrderDetalis'){
+				opts.params = {ordercode:this.$store.state.orderNo}
+			}
 			this.showData(opts);
 		},
 		methods:{
@@ -167,8 +170,8 @@
 		    	    this.showData(opts);
 		        }
 			},
-			orderDetalis() {
-				
+			orderDetalis(ordercode) {
+				this.$store.state.orderNo = ordercode;
 				router.push('/orderdetalis');
 			},
 			confirm(row){
