@@ -34,7 +34,11 @@
 	export default {
 		methods: {
 			
-		}
+		},
+        mounted:function(){
+            var footer = document.querySelector('.footer');
+            footer.style.display = 'block';  
+        }
 	}
 </script>
 <style lang="scss">
