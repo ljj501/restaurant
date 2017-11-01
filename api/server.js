@@ -17,8 +17,11 @@ app.all('*', function(req, res, next) {
 });
 
 
-app.get('/getgoods', function(request, response){
-	db.select('select * from test limit 10', function(rows){
+app.get('/getgoods', function(request, response)
+{
+
+	db.select('select * from orderdata limit 10', function(rows){
+        // console.log(rows)
 		response.send(rows);
 	})
 	
