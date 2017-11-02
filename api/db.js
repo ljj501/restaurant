@@ -44,6 +44,7 @@ module.exports = {
               callback(rows);
           })
     },
+<<<<<<< HEAD
     //修改分類
     updateClass: function(tsql, newSql,callback){
           pool.query(tsql, function(error, rows_1){
@@ -53,6 +54,8 @@ module.exports = {
               })
           })
     },
+=======
+>>>>>>> 91ded86702f3b1e1e2e94a472c33da7b49a8393d
     //分页
     turnPage: function(tsql, callback){
         pool.query(tsql, function(error, rows){
