@@ -12,6 +12,8 @@ var orderRouter = require('./orderRouter.js');
 
 var classRouter = require('./classRouter.js');
 
+var loginRouter = require('./loginRouter.js');
+
 module.exports = {
     allRouter: function(app){
         
@@ -39,6 +41,9 @@ module.exports = {
         orderRouter.order(app, db);
         //订单管理
         classRouter.dishClass(app, db);
+        //登陆
+        loginRouter.Register(app, db);
+        
 
 
     }

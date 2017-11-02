@@ -83,6 +83,7 @@
             this.arr = this.$parent.$children[0].dataset;
         },
         mounted: function(){
+            console.log(this.api)
             var self = this;
             http.post({
                 url: self.api,

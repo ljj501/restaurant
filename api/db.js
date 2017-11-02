@@ -2,22 +2,13 @@ var mysql = require('mysql');
 
 //创建连接池
 var pool  = mysql.createPool({
-  host     : '127.0.0.1',
+  host     : 'localhost',
   user     : 'root',
-  password : '123456',
+  password : '',
   port: 3306,
   database: 'gg'
 });
 module.exports = {
-<<<<<<< HEAD
-	select: function(tsql, callback){
-        // console.log(tsql);
-		pool.query(tsql, function(error, rows){
-            console.log(rows)
-			callback(rows);
-		})
-	}
-=======
     //查找菜品数据总数,及开始显示数据
   	select: function(tsql, tableName,callback){
           pool.query(`select count(id) from ${tableName}`, function(error, total){
@@ -85,5 +76,4 @@ module.exports = {
         })
     }
 
->>>>>>> e3c63fa42b25ab4636bc4f6419b810c4e9e80682
 }

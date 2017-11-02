@@ -34,7 +34,7 @@
             }
         },
         mounted: function(){
-            console.log(666)
+            console.log(this.api);
             var self = this;
             http.post({
                 url: self.api,

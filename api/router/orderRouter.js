@@ -21,5 +21,21 @@ module.exports = {
                 response.send(data);
             })  
         })
+        //获取订单
+        app.post('/Webgetorder', function(request, response){
+            var sql =`select * from orderdetalis`;
+            db.select(sql,'orderdetalis',function(data){
+                response.send(data);
+            })  
+        })
+        //订单修改
+        app.post('/Webdeleted', function(request, response){
+            var sql =`update orderdetalis set status='取消' where name = ${request.body.name}`;
+            db.update(sql, function(data){
+                response.send(data);
+                console.log(data) 
+            })
+             
+        })
     }
 }
