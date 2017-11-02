@@ -30,7 +30,7 @@ module.exports = {
         app.post('/getChange', function(request, response){
             var sql = 'update dishname set ';
             for( key in request.body){
-                if(key != 'edit'&& key != 'id'){
+                if(key != 'edit'&& key != 'id' && key!="confirm" && key!="disable"){
                     sql += `${key}='${request.body[key]}',`;
                 }
             }
@@ -55,8 +55,13 @@ module.exports = {
         })
         //添加菜品
         app.post('/addDish', function(request, response){
+
             var newData = request.body;
-            var sql = `insert into dishname (name, classify, number, picture, price, time, creatDate, status) values ('${newData.name}', '${newData.classify}','${newData.number}','${newData.picture}','${newData.price}','${newData.time}','${newData.creatDate}','${newData.status}')`;
+            var newOrderTime = newData.time.split('T');
+            newOrderTime[1] =newOrderTime[1].slice(0,-5);
+            var ordertime = newOrderTime.join(' ');
+            console.log(ordertime);
+            var sql = `insert into dishname (name, classify, number, picture, price, time, creatDate, status) values ('${newData.name}', '${newData.classify}','${newData.number}','${newData.picture}','${newData.price}','${ordertime}','${newData.creatDate}','${newData.status}')`;
             db.insert(sql, function(data){
                 response.send(data);
             })  

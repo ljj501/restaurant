@@ -8,9 +8,9 @@
     	          <el-input v-show="scope.row.edit" size="small" v-model="scope.row[val.fields]" v-if="filter.indexOf(val.fields)>-1? true : false"></el-input>
     	          <span v-show="scope.row.edit" v-else-if="val.fields=='picture'?false : true" 
     	          :class="scope.row[val.fields]=='正在卖'?'z-putaway':(scope.row[val.fields]=='已下架'?'z-outaway':'')">{{ scope.row[val.fields] }}</span>
-    	          <img v-show="scope.row.edit"  v-else :src="scope.row[val.fields]" style="width:30px;height:30px;"/>
+    	          <img v-show="scope.row.edit"  v-else :src="scope.row[val.fields]" style="width:44px;height:44px;"/>
     	          <span v-show="!scope.row.edit" :class="scope.row[val.fields]=='正在卖'?'z-putaway':(scope.row[val.fields]=='已下架'?'z-outaway':'')" v-if="val.fields=='picture'?false : true">{{ scope.row[val.fields] }}</span>
-    	          <img v-show="!scope.row.edit"  v-else :src="scope.row[val.fields]" style="width:30px;height:30px;"/>
+    	          <img v-show="!scope.row.edit"  v-else :src="scope.row[val.fields]" style="width:44px;height:44px;"/>
     	        </div>
 
 	    		<div v-else-if="tableName =='saleorder'? true : false">
@@ -18,11 +18,11 @@
     	        </div>
 
     	        <div v-else-if="tableName =='orderdetalis'? true : false">
-    	          <span v-show="!scope.row.edit" :class="scope.row[val.fields]=='未做'?'z-nopay':(scope.row[val.fields]=='已做'?'z-pay':'')">{{ scope.row[val.fields] }}</span>
+    	          <span v-show="!scope.row.edit" :class="scope.row[val.fields]=='未做'?'z-nopay':(scope.row[val.fields]=='已做'?'z-pay':(scope.row[val.fields]=='取消'?'z-cancel':''))">{{ scope.row[val.fields] }}</span>
     	        </div>
 
     	        <div v-else="tableName =='dishclass'? true : false">
-    	          <span v-show="!scope.row.edit" :class="scope.row[val.fields]=='正在卖'?'z-nopay':(scope.row[val.fields]=='已下架'?'z-pay':'')">{{ scope.row[val.fields] }}</span>
+    	          <span v-show="!scope.row.edit" :class="scope.row[val.fields]=='正在卖'?'z-putaway':(scope.row[val.fields]=='已下架'?'z-outaway':'')">{{ scope.row[val.fields] }}</span>
     	        </div>
 
 	    	</template>
@@ -43,7 +43,7 @@
 	    	    </div>
 
 	    	    <div v-else-if="tableName =='orderdetalis'? true : false">
-	    	    	<el-button type="success" size="mini" class="z-detalis" @click="confirm(scope.row)" :disabled="scope.row.status == '未做' ? scope.row.disable = false : scope.row.disable = true">下厨</el-button>
+	    	    	<el-button type="success" size="mini" class="z-detalis" @click="confirm(scope.row)" :disabled="(scope.row.status == '未做' || scope.row.status == '取消') ? scope.row.disable = false : scope.row.disable = true">下厨</el-button>
 	    	    </div>
 
 	    	    <div v-else="tableName =='dishclass'? true : false">
@@ -57,7 +57,7 @@
 	    	</template>
 	    </el-table-column>
 	  </el-table>
-	  <turnpage :total='totalNumber' :params='params'></turnpage>
+	  <turnpage :total='totalNumber' :params='params' :pageSize="pageSize"></turnpage>
 	  <loading v-show="loadingShow"></loading>
 	</div>
 </template>
@@ -101,7 +101,16 @@
 					'getClassDish':'dishclass'
 				}
 				return apiAll[this.api];
-			} 
+			},
+			pageSize:function(){
+				var apiAll = {
+					'getDish':6,
+					'getOrder':10,
+					'getOrderDetalis':10,
+					'getClassDish':10
+				}
+				return apiAll[this.api];
+			}
 		},
 		watch:{
 			'params.pageNumber': function(val, oldVal){
@@ -143,6 +152,46 @@
 			}
 			this.showData(opts);
 		},
+		sockets: {  
+	        connect: function(){  
+	          console.log('socket connected')  
+	        },
+	        receiveOrder: function(data){
+	        	http.post({
+	        		url:'getMaxOrder',
+	        		params:{}
+	        	}).then(res=>{
+	        		if(res.data){
+	        			var newOrderCode = 'd'+("00000"+(res.data[0].ordercode.slice(1)*1+1)).substr(-6,6);
+	        			var newOrder = {
+	        				ordercode:newOrderCode,
+	        				rank:data.rank,
+	        				orderprice:data.orderprice,
+	        				ordertime:(new Date()),
+	        				status:'未付款'
+	        			}
+	        			for(var i=0; i<data.data.length;i++){
+	        				data.data[i].ordercode = newOrderCode;
+	        				data.data[i].rank = data.rank;
+	        				data.data[i].status = '未做';
+	        			}
+	        			var newOrderDetalis = {
+	        				orderDetalis:JSON.stringify(data.data)
+	        			}
+	        			http.post({
+	        				url:'setNewOrder',
+	        				params:newOrder
+	        			}).then(res=>{
+	        			});
+	        			http.post({
+	        				url:'setNewOrderDetalis',
+	        				params:newOrderDetalis
+	        			}).then(res=>{
+	        			});
+	        		}
+	        	})
+	        } 
+		},
 		methods:{
 			showData:function(opts){
 				var self = this;
@@ -153,6 +202,7 @@
 						if(item.creatDate){
 							item.creatDate = item.creatDate.slice(0,10);
 						}else if(item.ordertime){
+							console.log(item.ordertime);
 							var newOrderTime = item.ordertime.split('T');
 							newOrderTime[1] =newOrderTime[1].slice(0,-5);
 							item.ordertime = newOrderTime.join(' ');

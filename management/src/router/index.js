@@ -15,27 +15,33 @@ var router = new VueRouter({
 	routes: [
 		{
 			path: '/',
-			name: 'home',
+			name: '主页',
+			alias: 'home',
 			component: HomeComponent,
 			children: [{
 				path: 'goodslist',
-				name: 'goodslist',
+				name: '菜品管理',
+				alias:'菜品管理',
 				component: GoodsListComponent
 			},{
 				path: 'goodsform',
-				name: 'goodsform',
+				name: '添加菜品',
+				alias: '添加菜品',
 				component: GoodsFormComponent
 			},{
 				path: 'salesorder',
-				name: 'salesorder',
+				name: '销售订单',
+				alias: '销售订单',
 				component: SalesOrderComponent
 			},{
 				path: 'orderdetalis',
-				name: 'orderdetalis',
+				name: '订单详情',
+				alias: '订单详情',
 				component: OrderdetalisComponent
 			},{
 				path: 'dishclass',
-				name: 'dishclass',
+				name: '菜品分类',
+				alias: '菜品分类',
 				component: DishclassComponent
 			}]
 		},

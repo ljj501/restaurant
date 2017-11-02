@@ -12,7 +12,7 @@
 	 	<el-container>
 	    	<el-header>
 				<el-breadcrumb separator-class="el-icon-arrow-right">
-					<el-breadcrumb-item  @click="crumbs" v-for='val in crumbsData' :to='val'>{{val.name}}</el-breadcrumb-item>
+					<el-breadcrumb-item  v-for='(val, key) in crumbsData' :to='val' >{{val.name}}</el-breadcrumb-item>
 				</el-breadcrumb>
 	    	</el-header>
 	    	<el-main>
@@ -62,7 +62,7 @@
 			  	findData:[],
 			  	totalNumber:''
 			  }],
-			  crumbsData:[{name:'home'}]
+			  crumbsData:[{name:'主页'}]
 		    }
 		},
 		methods: {
@@ -71,7 +71,6 @@
 				this.$store.state.show = false;
 			},
 			crumbs: function(e){	
-					console.log(this.$route.matched);
 					var crumbsArray = [];
 					for(var i=0;i<this.$route.matched.length;i++){
 						crumbsArray.push({name:this.$route.matched[i].name})

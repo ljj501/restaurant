@@ -37,6 +37,11 @@
                 dataset:{}
             }
         },
+        sockets: {  
+            connect: function(){  
+              console.log('socket connected')  
+            }
+        },
         methods:{
             yes:function(){
                 if($('.l-cover').length <= 1 ){
@@ -49,22 +54,24 @@
             back:function(){
                  $('.tc').css({'display':'none'});
                  $('.l-cover').remove()
-                 $('.box').find('table').remove()
+                 $('.box').find('table').remove();
+                 
             },
             confirm:function(){
                 $('.tc').css({'display':'none'});
                 $('.l-cover').remove()
                 $('.box').find('table').remove()
                 router.push('./order')
-                var self = this;
-                http.post({
-                    url:'/orderlist',
-                    params:this.dataset,
-                    vm:self
-                }).then(res => {
-                     // router.push('./order')
-                    console.log(res.data)
-                })
+                // var self = this;
+                // http.post({
+                //     url:'/orderlist',
+                //     params:this.dataset,
+                //     vm:self
+                // }).then(res => {
+                //      // router.push('./order')
+                //     console.log(res.data)
+                // })
+                this.$socket.emit('sendOrder', this.dataset);
             },
             showlist:function(){
                 if($('.box').find('table').length == 0){

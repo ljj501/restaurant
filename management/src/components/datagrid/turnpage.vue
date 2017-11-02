@@ -4,7 +4,7 @@
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
         :current-page="currentPage"
-        :page-size="6"
+        :page-size="pageSize"
         layout="total, prev, pager, next, jumper"
         :total="total">
       </el-pagination>
@@ -30,6 +30,6 @@
         currentPage: 1
       };
     },
-    props:['total','params']
+    props:['total','params','pageSize']
   }
 </script>
