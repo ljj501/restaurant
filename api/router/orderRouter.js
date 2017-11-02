@@ -21,5 +21,10 @@ module.exports = {
                 response.send(data);
             })  
         })
+
+        //web传送订单
+        app.post('/sentWetOrder',function(request,response){
+            console.log(request.body)
+        })
     }
 }

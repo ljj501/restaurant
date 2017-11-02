@@ -55,15 +55,15 @@
                 $('.tc').css({'display':'none'});
                 $('.l-cover').remove()
                 $('.box').find('table').remove()
-                router.push('./order')
+                // router.push('./order')
                 var self = this;
                 http.post({
-                    url:'/orderlist',
-                    params:this.dataset,
+                    url:'sentWetOrder',
+                    params:self.dataset,
                     vm:self
                 }).then(res => {
-                     // router.push('./order')
                     console.log(res.data)
+                     router.push('./order')
                 })
             },
             showlist:function(){
@@ -105,7 +105,7 @@
                     }
                     var arr = {rank:1,orderprice:orderprice,data:temp}
                     this.dataset = arr;
-                    // console.log(this.dataset)
+                    console.log(this.dataset)
                     $table.append($tbody)
                     $('.box').append($table)
                 }else if($('.box').find('table').length > 0 ){
