@@ -15,7 +15,8 @@
     export default {
         data: function(){
             return {
-                dataset: [{'id':1,'classify':'米线'},{'id':2,'classify':'米饭'},{'id':3,'classify':'腐竹'},{'id':4,'classify':'大米'},{'id':5,'classify':'河粉'},{'id':6,'classify':'肠粉'},{'id':7,'classify':'豆腐'},{'id':8,'classify':'豆芽'},{'id':9,'classify':'豆干'},{'id':9,'classify':'豆干'}],
+                // dataset: [{'id':1,'classify':'米线'},{'id':2,'classify':'米饭'},{'id':3,'classify':'腐竹'},{'id':4,'classify':'大米'},{'id':5,'classify':'河粉'},{'id':6,'classify':'肠粉'},{'id':7,'classify':'豆腐'},{'id':8,'classify':'豆芽'},{'id':9,'classify':'豆干'},{'id':9,'classify':'豆干'}],
+                dataset:[],
                 loadingShow: false,
             }
         },
@@ -35,11 +36,11 @@
         mounted: function(){
             console.log(666)
             var self = this;
-            http.get({
+            http.post({
                 url: self.api,
                 vm:self
             }).then(res => {
-                self.dataset = res.data;
+                self.dataset = res.data[1];
             })
         },
         components: {

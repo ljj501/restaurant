@@ -1,6 +1,6 @@
 <template>
     <div>
-        <datagrid api="getOrder" :cols='props' :searchData='tranData'></datagrid>
+        <datagrid api="getOrderDetalis" :cols='props' :searchData='tranData'></datagrid>
     </div>
 </template>
 
@@ -11,14 +11,14 @@
         data(){
             return {
                 props:[
-                    {fields:'id',showName:'ID'},
                     {fields:'ordercode',showName:'订单编码'},
                     {fields:'rank',showName:'桌号'},
-                    {fields:'orderprice',showName:'订单总额'},
-                    {fields:'ordertime',showName:'下单时间'},
+                    {fields:'name',showName:'菜品名称'},
+                    {fields:'num',showName:'菜品数量'},
+                    {fields:'price',showName:'菜品单价'},
                     {fields:'status',showName:'状态'}
                 ],
-                length:['80px', '', '120px', '140px', '180px', '100px', '80px']
+                length:['100px', '100px', '',  '140px', '180px', '100px', '80px']
             }
         },
         props:['search'],
