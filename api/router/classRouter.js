@@ -4,6 +4,7 @@ module.exports = {
         app.post('/getClassDish', function(request, response){
             var pageSize = 10;
             db.select(`select * from dishclass limit ${pageSize}`, 'dishclass', function(data){
+                console.log(data)
                 response.send(data);
             })  
         })
@@ -22,5 +23,6 @@ module.exports = {
                 response.send(data);
             })  
         })
+
     }
 }

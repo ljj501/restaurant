@@ -4,10 +4,7 @@ import router from './router/'
 import $ from 'jquery'
 import VueSocketio from "vue-socket.io"
 
-
 Vue.use(VueSocketio, 'http://localhost:5566');  
-
-
 
 new Vue({
   el: '#app',

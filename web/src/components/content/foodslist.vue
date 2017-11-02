@@ -24,11 +24,9 @@
     import './foodslist.scss'
     import http from '../../utils/httpClient.js'
     import loading from '../loading/loading.vue'
-
     export default {
         data: function(){            
             return {
-                // dataset: [{'id':1,'classify':'米线','name':'甘草米线'},{'id':2,'classify':'米线','name':'湿草米线'},{'id':3,'classify':'米线','name':'班草米线'},{'id':4,'classify':'米线','name':'无敌米线'},{'id':5,'classify':'河粉','name':'甘草河粉'},{'id':6,'classify':'河粉','name':'湿艹河粉'},{'id':7,'classify':'河粉','name':'班草河粉'},{'id':8,'classify':'河粉','name':'无敌河粉'}],
                 dataset:[],
                 num:0,
                 arr:[],
@@ -44,12 +42,13 @@
                 var all = document.getElementsByClassName('all')[0];
                 var yes = document.getElementsByClassName('yes')[0];
                 var car = document.getElementsByClassName('car')[0];
-                var allPrice = all.innerText;
+                var price = father.parentNode.children[3].innerHTML;
 
+                var allPrice = all.innerText;
                 del.style.display="block";
                 number.style.display="block";
                 number.innerText++;
-                allPrice = allPrice*1 + 1*1000;
+                allPrice = allPrice*1 + 1*price;
                 all.innerHTML = allPrice;
                 if(allPrice > 0 ){
                     yes.style.backgroundColor='#4cd964';
@@ -64,19 +63,31 @@
                 var allPrice = all.innerText;
                 var yes = document.getElementsByClassName('yes')[0];
                 var car = document.getElementsByClassName('car')[0];
+                var price = father.parentNode.children[3].innerHTML;
 
                 number.innerText--;
                 if(number.innerText <1){
                     event.target.style.display='none';
                     number.style.display='none';
                 }
-                allPrice = allPrice*1 - 1*1000;
+                allPrice = allPrice*1 - 1*price;
                 all.innerHTML = allPrice;
    
                  if(allPrice == '0' ){
                     yes.style.backgroundColor='#535356';
                     car.style.backgroundColor='#3d3d3f';
                 }
+            },
+            jj:function(){
+                var self = this;
+                console.log(self.arr)
+                self.arr = self.$parent.$children[0].dataset;
+                http.post({
+                    url: self.api,
+                    vm:self
+                }).then(res => {
+                    self.dataset = res.data[1]
+                })
             }
 
         },
@@ -84,6 +95,7 @@
             this.arr = this.$parent.$children[0].dataset;
         },
         mounted: function(){
+            console.log(this.api)
             var self = this;
             http.post({
                 url: self.api,

@@ -11,7 +11,7 @@
 <script type="text/javascript">
     import http from '../../utils/httpClient.js'
     import loading from '../loading/loading.vue'
-
+    
     export default {
         data: function(){
             return {
@@ -23,8 +23,6 @@
         props: ['api'],
         methods:{
             active:function(event){
-             
-                console.log(event.target)
                 var currentA = event.target;
                 var lis = currentA.parentNode.parentNode.children;
                 for(var i=0;i<lis.length;i++){
@@ -34,14 +32,16 @@
             }
         },
         mounted: function(){
-            console.log(666)
             var self = this;
             http.post({
                 url: self.api,
                 vm:self
             }).then(res => {
+                console.log(self.$parent.$children[1].jj)
                 self.dataset = res.data[1];
+                self.$parent.$children[1].jj();
             })
+
         },
         components: {
             loading

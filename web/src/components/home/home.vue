@@ -1,9 +1,9 @@
-<template>	
+<template>
 	<div class="box">
 		<div class="header">
 			<div class="right">
 				<h3>欢迎光临真实惠</h3>
-				<p>选择活力无限,不要让今天的疲劳留到明天</p>
+				<p>您的第二个家庭厨房,不要让今天的疲劳留到明天</p>
 				<p class="fl">您当前的桌号为<span class="rank">01</span></p>
 			</div>
 			<div class="logo">
@@ -11,24 +11,17 @@
 			</div>
 		</div>
 		<div class="bar">
-		
 			<div><router-link to="detail" class='span'>商品详情</router-link></div>
-			<div><router-link to="order" class='span'>我的订单</router-link></div>
+			<div><router-link to="order" class='span'>我的订单</router-link></div>	
 		</div>
-
-		
 		<router-view></router-view>
-	
 	</div>
 </template>
 
 <script type="text/javascript">
 	import './home.scss'
-	import '../icon-font/iconfont.js'
-	import router from  '../../router/'
-	import http from '../../utils/httpClient.js'
-    import loading from '../loading/loading.vue'
-	//$children
+	import router from '../../router/index.js'
+	import loading from '../loading/loading.vue'
 	export default {
 		data:function(){
 			return{
@@ -40,20 +33,12 @@
 		},
 		mounted:function(){
 			router.push('/detail');
-			// var footer = document.querySelector('.footer');
-   //          footer.style.display = 'block';  
+
 		},
 		components: {
-            loading
+            // loading
          }
 	}
 </script>
 <style lang="scss">
-.icon {
-   width: 2.3em; height: 2.3em;
-   vertical-align: -0.15em;
-   fill: #fff;
-   overflow: hidden;
-   color:#fff;
-}
 </style>

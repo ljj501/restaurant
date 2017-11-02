@@ -162,7 +162,11 @@
 	        		params:{}
 	        	}).then(res=>{
 	        		if(res.data){
-	        			var newOrderCode = 'd'+("00000"+(res.data[0].ordercode.slice(1)*1+1)).substr(-6,6);
+	        			if(res.data.length>0){
+	        				var newOrderCode = 'd'+("00000"+(res.data[0].ordercode.slice(1)*1+1)).substr(-6,6);
+	        			} else {
+	        				var newOrderCode = 'd000001';
+	        			}
 	        			var newOrder = {
 	        				ordercode:newOrderCode,
 	        				rank:data.rank,
