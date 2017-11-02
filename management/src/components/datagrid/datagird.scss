@@ -38,3 +38,39 @@
 .z-pay{
     background-color:#5cb85c;padding:5px;color:#fff;
 }
+.z-danger{
+    color: #fff;
+    background-color: #fa5555;
+    border-color: #fa5555;
+    width:100px;
+}
+.z-danger:hover{
+    color: #fff;
+    background: #fb7777;
+    border-color: #fb7777;
+    width:100px;
+}
+.z-danger:active{
+    color: #fff;
+    background: #e14d4d;
+    border-color: #e14d4d;
+    width:100px;
+}
+.z-warning{
+    color: #fff;
+    background-color: #eb9e05;
+    border-color: #eb9e05;
+    width:100px;
+}
+.z-warning:hover{
+    color: #fff;
+    background: #efb137;
+    border-color: #efb137;
+    width:100px;
+}
+.z-warning:active{
+    color: #fff;
+    background: #d48e05;
+    border-color: #d48e05;
+    width:100px;
+}

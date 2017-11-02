@@ -44,6 +44,15 @@ module.exports = {
               callback(rows);
           })
     },
+    //修改分類
+    updateClass: function(tsql, newSql,callback){
+          pool.query(tsql, function(error, rows_1){
+              pool.query(newSql, function(error, rows_2){
+                  var data = [rows_1, rows_2]
+                  callback(data);
+              })
+          })
+    },
     //分页
     turnPage: function(tsql, callback){
         pool.query(tsql, function(error, rows){

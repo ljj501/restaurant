@@ -7,5 +7,14 @@ module.exports = {
                 response.send(data);
             })  
         })
+        //改變分類
+        app.post('/changeClass', function(request, response){
+            var newData = request.body;
+            var sql =`update dishclass set status='${newData.status}' where id=${newData.id}`;
+            var newSql = `update dishname set status='${newData.status}' where classify='${newData.classify}'`;
+            db.updateClass(sql, newSql, function(data){
+                response.send(data);
+            })  
+        })
     }
 }

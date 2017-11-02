@@ -16,7 +16,7 @@
                     {fields:'number',showName:'分类编码'},
                     {fields:'status',showName:'状态'}
                 ],
-                length:['100px', '100px', '',  '140px', '180px']
+                length:['100px', '200px', '',  '180px', '180px']
             }
         },
         props:['search'],
