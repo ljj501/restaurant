@@ -45,9 +45,7 @@
                 var car = document.getElementsByClassName('car')[0];
                 var price = father.parentNode.children[3].innerHTML;
 
-                console.log(price)
                 var allPrice = all.innerText;
-                // console.log(this.dataset)
                 del.style.display="block";
                 number.style.display="block";
                 number.innerText++;
@@ -80,22 +78,32 @@
                     yes.style.backgroundColor='#535356';
                     car.style.backgroundColor='#3d3d3f';
                 }
+            },
+            jj:function(){
+                var self = this;
+                console.log(self.arr)
+                self.arr = self.$parent.$children[0].dataset;
+                http.post({
+                    url: self.api,
+                    vm:self
+                }).then(res => {
+                    self.dataset = res.data[1]
+                })
             }
 
         },
-        updated:function(){
-            this.arr = this.$parent.$children[0].dataset;
-        },
-        mounted: function(){
-            var self = this;
-            http.post({
-                url: self.api,
-                vm:self
-            }).then(res => {
-                self.dataset = res.data[1]
-                console.log(self.dataset)
-            })
-        },
+        // mounted: function(){
+        //     var self = this;
+    
+        //     console.log(self.arr)
+        //     self.arr = self.$parent.$children[0].dataset;
+        //     http.post({
+        //         url: self.api,
+        //         vm:self
+        //     }).then(res => {
+        //         self.dataset = res.data[1]
+        //     })
+        // },
         components: {
             loading
         }

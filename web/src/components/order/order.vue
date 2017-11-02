@@ -42,11 +42,11 @@
                 <p v-show='message'>您的菜正在下厨,不能删除，请您稍等...</p>
                 <p v-show="!message">这么好吃的特色菜,您确定要取消么？</p>
                 <div v-if="message">
-                    <span class="tt-btn" @click="alert" :style="{float:left}">返回</span>
+                    <span class="tt-btn" @click="alert" >返回</span>
                 </div>
                 <div v-if="!message">
                     <span class="t-giveup" @click="alert" v-show="!message">确定</span>
-                    <span class="t-btn" @click="alert" :style="{float:left}">返回</span>
+                    <span class="t-btn" @click="alert" >返回</span>
                 </div>
                 
             </div>
@@ -108,8 +108,6 @@
                 this.ttotal += Tdata[i].num*Tdata[i].price;
             }
             console.log(this.ttotal);
-            var footer = document.querySelector('.footer');
-            footer.style.display = 'none';  
         }
             
     }

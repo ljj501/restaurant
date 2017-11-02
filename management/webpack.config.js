@@ -63,6 +63,12 @@ module.exports = {
     noInfo: true,
     overlay: true
   },
+  plugins: [  
+   new webpack.ProvidePlugin({
+       jQuery: "jquery",
+       $: "jquery"
+   })
+  ],
   performance: {
     hints: false
   },

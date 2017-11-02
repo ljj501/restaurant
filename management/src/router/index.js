@@ -14,6 +14,11 @@ Vue.use(VueRouter)
 var router = new VueRouter({
 	routes: [
 		{
+			path: '/login',
+			name: 'login',
+			component: LoginComponent
+		},
+		{
 			path: '/',
 			name: 'home',
 			component: HomeComponent,
@@ -38,11 +43,6 @@ var router = new VueRouter({
 				name: 'dishclass',
 				component: DishclassComponent
 			}]
-		},
-		{
-			path: '/login',
-			name: 'login',
-			component: LoginComponent
 		}
 	]
 })

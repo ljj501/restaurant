@@ -114,7 +114,10 @@
 						self.searchData[0].totalNumber =res.data[0][0]["count(id)"];
 					})
 				}
+				this.crumbsData = crumbsArray;
 			}
+		},
+		mounted:function(){	
 		}
 	}
 </script>

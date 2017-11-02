@@ -20,6 +20,7 @@
                 <button class="confirm" @click="confirm">确定下单</button>
                 <button @click='back'>我再看看</button>
             </div>
+
     </div>
 
 </template>
@@ -51,20 +52,36 @@
                  $('.l-cover').remove()
                  $('.box').find('table').remove()
             },
+            sockets:{
+                connect: function(){  //这里是监听connect事件
+                  this.id=this.$socket.id
+                }
+            },
+            mounted:function(){
+                this.$socket.emit('connect', val); //在这里触发connect事件
+            },
+            // methods: {
+            //     clickButton: function(val){
+            //         // $socket is socket.io-client instance
+            //         this.$socket.emit('emit_method', val);
+            //     }
+            // }
             confirm:function(){
                 $('.tc').css({'display':'none'});
                 $('.l-cover').remove()
                 $('.box').find('table').remove()
                 // router.push('./order')
-                var self = this;
-                http.post({
-                    url:'sentWetOrder',
-                    params:self.dataset,
-                    vm:self
-                }).then(res => {
-                    console.log(res.data)
-                     router.push('./order')
-                })
+                // var self = this;
+                // http.post({
+                //     url:'sentWetOrder',
+                //     params:self.dataset,
+                //     vm:self
+                // }).then(res => {
+                //     console.log(res.data)
+                //      router.push('./order')
+                // })     
+                this.$socket.emit('sendOrder',this.dataset);  
+                console.log(this.dataset)       
             },
             showlist:function(){
                 if($('.box').find('table').length == 0){
@@ -81,7 +98,7 @@
                     var $clear = $('<td>').html('清空').appendTo($Tr)
                     var $table = $('<table/>').append($thead)
                     var $tbody = $('<tbody/>')
-
+                    // var $tfoot = $('<tfoot/>').html(`<tr><td></td><td></td><td></td></tr>`).appendTo($table)
                     var temp = [];
                     for(var num of $nums){
                         if(num.innerText > 0){
