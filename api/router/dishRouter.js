@@ -70,5 +70,12 @@ module.exports = {
                 response.send(data);
             })  
         })
+
+        //web获取所有菜品
+        app.post('/getWebGoods', function(request, response){
+            db.select(`select * from dishname`, 'dishname', function(data){
+                response.send(data);
+            })  
+        })
     }
 }
