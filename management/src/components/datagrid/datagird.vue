@@ -17,6 +17,9 @@
     	        <div v-else-if="tableName =='orderdetalis'? true : false">
     	          <span v-show="!scope.row.edit" :class="scope.row[val.fields]=='未做'?'z-nopay':(scope.row[val.fields]=='已做'?'z-pay':'')">{{ scope.row[val.fields] }}</span>
     	        </div>
+    	        <div v-else="tableName =='dishclass'? true : false">
+    	          <span v-show="!scope.row.edit" :class="scope.row[val.fields]=='正在卖'?'z-nopay':(scope.row[val.fields]=='已下架'?'z-pay':'')">{{ scope.row[val.fields] }}</span>
+    	        </div>
 	    	</template>
 	    </el-table-column>
 	    <el-table-column label="操作">
@@ -32,7 +35,13 @@
 	    	    	<el-button type="success" size="mini" class='z-detalis' @click="orderDetalis(scope.row.ordercode)">查看详情</el-button>
 	    	    </div>
 	    	    <div v-else-if="tableName =='orderdetalis'? true : false">
-	    	    	<el-button type="success" size="mini" class="z-detalis" @click="confirm(scope.row)" :disabled='scope.row.disable'>下厨</el-button>
+	    	    	<el-button type="success" size="mini" class="z-detalis" @click="confirm(scope.row)" :disabled="scope.row.status == '未做' ? scope.row.disable = false : scope.row.disable = true">下厨</el-button>
+	    	    </div>
+	    	    <div v-else="tableName =='dishclass'? true : false">
+	    	    	<el-button
+	    	        size="mini"
+	    	        :type="scope.row.status=='正在卖'?'danger':'warning'"
+	    	        @click="handleDelete(scope.$index, scope.row)">{{scope.row.status=='正在卖'?'下架':'恢复'}}</el-button>
 	    	    </div>
 	    	</template>
 	    </el-table-column>
@@ -77,7 +86,8 @@
 				var apiAll = {
 					'getDish':'dishname',
 					'getOrder':'saleorder',
-					'getOrderDetalis':'orderdetalis'
+					'getOrderDetalis':'orderdetalis',
+					'getClassDish':'dishclass'
 				}
 				return apiAll[this.api];
 			} 
@@ -112,7 +122,6 @@
 			} 
 		},
 		mounted: function(){
-			this.dataset = this.searchData;
 			var opts = {
 					url: this.api,
 					vm:this,
@@ -140,7 +149,6 @@
 							item.edit = false;
 							item.confirm = false;
 							item.disable = false;
-							
 						});
 						self.dataset = res.data[1];
 					}
@@ -177,6 +185,14 @@
 			confirm(row){
 				row.confirm = true;
 				row.disable = true;
+				row.status = '已做';
+	    	    var opts = {
+	    	    	url:'changeOrder',
+	    	    	vm: this,
+	    	    	loading:'loadingShow',
+	    	    	params:{id:row.id}
+	    	    }
+	    	    this.showData(opts);
 			}
 
 		},

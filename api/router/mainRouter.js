@@ -10,6 +10,8 @@ var dishRouter = require('./dishRouter.js');
 
 var orderRouter = require('./orderRouter.js');
 
+var classRouter = require('./classRouter.js');
+
 module.exports = {
     allRouter: function(app){
         
@@ -35,5 +37,9 @@ module.exports = {
         dishRouter.dish(app, db);
         //订单管理
         orderRouter.order(app, db);
+        //订单管理
+        classRouter.dishClass(app, db);
+
+
     }
 }

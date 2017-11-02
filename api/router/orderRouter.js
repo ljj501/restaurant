@@ -14,5 +14,12 @@ module.exports = {
                 response.send(data);
             })  
         })
+        //修改数据
+        app.post('/changeOrder', function(request, response){
+            var sql =`update orderdetalis set status='已做' where id=${request.body.id}`;
+            db.update(sql, function(data){
+                response.send(data);
+            })  
+        })
     }
 }

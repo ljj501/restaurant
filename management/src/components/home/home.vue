@@ -5,7 +5,7 @@
 	   		<div class="logo"><span>点餐系统后台</span></div>
 			<ul>
 				<li @click="crumbs"><span class="el-icon-document"><router-link to="/salesorder">&nbsp;&nbsp;销售订单</router-link></span></li>
-				<li @click="crumbs"><span class="el-icon-share"><router-link to="/goodsform" >&nbsp;&nbsp;菜品分类</router-link></span></li>
+				<li @click="crumbs"><span class="el-icon-share"><router-link to="/dishclass" >&nbsp;&nbsp;菜品分类</router-link></span></li>
 				<li @click="crumbs"><span class="el-icon-menu"><router-link to="/goodslist">&nbsp;&nbsp;菜品管理</router-link></span></li>
 			</ul>
 	   </el-aside>
