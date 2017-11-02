@@ -3,7 +3,8 @@
 		<div class="header">
 			<div class="right">
 				<h3>欢迎光临真实惠</h3>
-				<p class="fl">您当前的桌号为</p><span></span>
+				<p>选择活力无限,不要让今天的疲劳留到明天</p>
+				<p class="fl">您当前的桌号为<span class="rank">01</span></p>
 			</div>
 			<div class="logo">
 			<img src="src/img/15e386ec1875697.jpeg" height="200" width="200" alt="" />
