@@ -40,8 +40,8 @@
 		},
 		mounted:function(){
 			router.push('/detail');
-			var footer = document.querySelector('.footer');
-            footer.style.display = 'block';  
+			// var footer = document.querySelector('.footer');
+   //          footer.style.display = 'block';  
 		},
 		components: {
             loading

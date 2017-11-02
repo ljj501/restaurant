@@ -7,7 +7,7 @@
                <h4 data-main='name'>{{obj.name}}</h4>
                <i class="imgbox"><img src="../../img/timg.jpg" /></i>
                <p>飒飒来看拉克丝撒旦啥卡看I我卡死当时发生撒旦撒萨芬</p>
-               <i class="pay">1000</i>
+               <i class="pay">{{obj.price}}</i>
                <div class="operate">
                    <i class="del" @click="del">-</i>
                    <span class="num" data-mian='num'>{{num}}</span>
@@ -28,9 +28,10 @@
     export default {
         data: function(){            
             return {
-                dataset: [{'id':1,'classify':'米线','name':'甘草米线'},{'id':2,'classify':'米线','name':'湿草米线'},{'id':3,'classify':'米线','name':'班草米线'},{'id':4,'classify':'米线','name':'无敌米线'},{'id':5,'classify':'河粉','name':'甘草河粉'},{'id':6,'classify':'河粉','name':'湿艹河粉'},{'id':7,'classify':'河粉','name':'班草河粉'},{'id':8,'classify':'河粉','name':'无敌河粉'}],
+                // dataset: [{'id':1,'classify':'米线','name':'甘草米线'},{'id':2,'classify':'米线','name':'湿草米线'},{'id':3,'classify':'米线','name':'班草米线'},{'id':4,'classify':'米线','name':'无敌米线'},{'id':5,'classify':'河粉','name':'甘草河粉'},{'id':6,'classify':'河粉','name':'湿艹河粉'},{'id':7,'classify':'河粉','name':'班草河粉'},{'id':8,'classify':'河粉','name':'无敌河粉'}],
+                dataset:[],
                 num:0,
-                arr:this.$parent.$children[0].dataset,
+                arr:[],
                 loadingShow: false,
             }
         },
@@ -79,15 +80,19 @@
             }
 
         },
-        // mounted: function(){
-        //     var self = this;
-        //     http.get({
-        //         url: self.api,
-        //         vm:self
-        //     }).then(res => {
-        //         self.dataset = res.data
-        //     })
-        // },
+        updated:function(){
+            this.arr = this.$parent.$children[0].dataset;
+        },
+        mounted: function(){
+            var self = this;
+            http.post({
+                url: self.api,
+                vm:self
+            }).then(res => {
+                self.dataset = res.data[1]
+                console.log(self.dataset)
+            })
+        },
         components: {
             loading
         }

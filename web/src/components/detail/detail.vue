@@ -1,7 +1,7 @@
 <template>
     <div class="content">
-            <navleft  api=""></navleft>
-            <foodslist></foodslist>
+            <navleft  api="getWebClass"></navleft>
+            <foodslist api='getWebGoods'></foodslist>
             <div class="footer">
                 <div class="left">
                     <i class="car" @click="showlist">

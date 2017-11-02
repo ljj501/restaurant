@@ -13,7 +13,7 @@
                         <p>￥<span class="price">{{obj.price}}</span></p>
                     </div>
                     <div class="right fl">
-                        <span class="num">{{obj.num}}</span>
+                        <span class="num">{{'x '+obj.num}}</span>
                         <span v-if="obj.status=='true'">
                             <span class="status" :style="{background:cookStatus[2]}">{{cookStatus[0]}}</span>
                             <span class="deleted" v-show="btnList" @click="alert" style="background:#188FE6;">{{btnStatus[2]}}</span>
