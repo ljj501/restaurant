@@ -72,10 +72,10 @@ module.exports = {
         })
 
         //web获取所有菜品
-      app.post('/getWebGoods', function(request, response){
-        db.select(`select * from dishname`, 'dishname', function(data){
-            response.send(data);
-        })  
+        app.post('/getWebGoods', function(request, response){
+            db.select(`select * from dishname`, 'dishname', function(data){
+                response.send(data);
+            })  
         })
 
     }

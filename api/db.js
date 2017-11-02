@@ -2,14 +2,12 @@ var mysql = require('mysql');
 
 //创建连接池
 var pool  = mysql.createPool({
-  host     : '127.0.0.1',
+  host     : 'localhost',
   user     : 'root',
   password : '123456',
   port: 3306,
   database: 'gg'
 });
-
-
 module.exports = {
     //查找菜品数据总数,及开始显示数据
   	select: function(tsql, tableName,callback){

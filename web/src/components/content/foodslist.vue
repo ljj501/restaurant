@@ -24,7 +24,6 @@
     import './foodslist.scss'
     import http from '../../utils/httpClient.js'
     import loading from '../loading/loading.vue'
-
     export default {
         data: function(){            
             return {
@@ -92,18 +91,20 @@
             }
 
         },
-        // mounted: function(){
-        //     var self = this;
-    
-        //     console.log(self.arr)
-        //     self.arr = self.$parent.$children[0].dataset;
-        //     http.post({
-        //         url: self.api,
-        //         vm:self
-        //     }).then(res => {
-        //         self.dataset = res.data[1]
-        //     })
-        // },
+        updated:function(){
+            this.arr = this.$parent.$children[0].dataset;
+        },
+        mounted: function(){
+            console.log(this.api)
+            var self = this;
+            http.post({
+                url: self.api,
+                vm:self
+            }).then(res => {
+                self.dataset = res.data[1]
+                console.log(self.dataset)
+            })
+        },
         components: {
             loading
         }

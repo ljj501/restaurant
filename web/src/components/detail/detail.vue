@@ -4,7 +4,7 @@
             <foodslist api='getWebGoods'></foodslist>
             <div class="footer">
                 <div class="left">
-                    <i class="car" @click="showlist">
+                    <i class="car icon-gouwuche iconfont" @click="showlist">
                         <svg class="icon" aria-hidden="true">
                           <use xlink:href="#icon-gouwuche"></use>
                         </svg>
