@@ -7,7 +7,6 @@ module.exports = {
                 response.send(data);
             })  
         })
-<<<<<<< HEAD
         //改變分類
         app.post('/changeClass', function(request, response){
             var newData = request.body;
@@ -23,7 +22,6 @@ module.exports = {
                 response.send(data);
             })  
         })
-=======
->>>>>>> 91ded86702f3b1e1e2e94a472c33da7b49a8393d
+
     }
 }

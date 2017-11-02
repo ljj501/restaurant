@@ -70,7 +70,6 @@ module.exports = {
                 response.send(data);
             })  
         })
-<<<<<<< HEAD
 
         //web获取所有菜品
       app.post('/getWebGoods', function(request, response){
@@ -78,7 +77,6 @@ module.exports = {
             response.send(data);
         })  
         })
-=======
->>>>>>> 91ded86702f3b1e1e2e94a472c33da7b49a8393d
+
     }
 }
