@@ -15,7 +15,8 @@
     "superagent": "^3.8.0",
     "vue": "^2.4.4",
     "vue-router": "^3.0.1",
-    "vue-strap": "^1.1.37"
+    "vue-strap": "^1.1.37",
+    "jquery" : "^2.2.3"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",

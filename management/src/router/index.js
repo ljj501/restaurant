@@ -13,6 +13,11 @@ var router = new VueRouter({
 	routes: [
 		{
 			path: '/',
+			name: 'login',
+			component: LoginComponent
+		},
+		{
+			path: '/home',
 			name: 'home',
 			component: HomeComponent,
 			children: [{
@@ -28,11 +33,6 @@ var router = new VueRouter({
 				name: 'salesorder',
 				component: SalesOrderComponent
 			}]
-		},
-		{
-			path: '/login',
-			name: 'login',
-			component: LoginComponent
 		}
 	]
 })

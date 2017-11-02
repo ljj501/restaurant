@@ -40,11 +40,7 @@
 		}
 		
 	},
-	mounted:function(){
-			// let canvas=this.$refs.cvs.$el;
-			// canvas.native = function(){
-			// 	console.log(canvas);
-			// }	
+	mounted:function(){	
 
 		}
   }

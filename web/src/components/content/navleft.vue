@@ -11,7 +11,7 @@
 <script type="text/javascript">
     import http from '../../utils/httpClient.js'
     import loading from '../loading/loading.vue'
-
+    
     export default {
         data: function(){
             return {
