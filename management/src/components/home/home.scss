@@ -14,6 +14,14 @@
         height:30px;
     }
 }
+
+.now{
+    background:#363F4C;
+    
+    span, a{
+        color:#fff!important;
+    }
+}
 .el-button{
     padding:7px 15px;font-size:12px;
 }
@@ -51,6 +59,7 @@ background-color: #495060;
 color: #333;
 text-align: center;
 // min-width:168px;
+height:794px;
 .logo{
     min-height:36px;
     margin:5% 0 0 10%;
@@ -108,4 +117,7 @@ line-height: 260px;
 
 .el-container:nth-child(7) .el-aside {
 line-height: 320px;
+}
+.el-aside ul li span:hover, .el-aside ul li a:hover{
+    color:#8A8F99;
 }

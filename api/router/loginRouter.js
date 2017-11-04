@@ -30,61 +30,18 @@ module.exports = {
         //  //你可以执行下一步操作
             
         // })
-        console.log(db.select);
         app.post('/Welogin', function(request, response){
             var sql =`select * from login`;
             db.select(sql,'login',function(data){
-                console.log(data)
                 response.send(data);
             })  
         })
-        app.post("/register", function(request, response){
-            db.select("user", {name:request.body.name}, function(result){
-                if(!result.status){
-                    response.send(result);
-                } else if(result.data.length > 0){
-                    response.send({status:false, message:"当前用户已存在"});
-                } else {
-                    db.insert("user", request.body, function(result){
-                        response.send(result);
-                    });
-                }
-            });
-        });
-        app.post("/login", function(request, response){
-            console.log(request);
-            db.select("username", request.body, function(result){
-                if(!result.status){
-                    response.send(result);
-                } else if(result.data.length > 0){
-                    console.log(request.body);
-                    var token = jwt.sign(request.body, "secret",  {
-                        'expiresIn': 1440 // 设置过期时间
-                    })
-                    console.log(token);
-                    response.send({status: true, token: token});
-                } else {
-                    response.send({status:false});
-                }
-            });
-        });
-        app.get("/login", function(request, response){
-            console.log(666)
-            request.session.name = request.query;
-            console.log(request.session);
-            response.send(true);
-        });
-        app.post("/index", function(req, res){
-            var token = req.headers['authorization'];
-            jwt.verify(token, 'secret', function(error, result){
-                if(error){
-                    res.send({status: false, message: error});
-                } else {
-                    res.send({status: true});
-                }
-            })        
+        app.post('/Weregister', function(request, response){
+            var sql =`insert into login values(request.body.name,request.body.pass)`;
+            db.insert(sql,'login',function(data){
+                response.send(data);
+            })  
         })
-
     }
 
 }

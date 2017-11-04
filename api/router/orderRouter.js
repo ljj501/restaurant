@@ -43,9 +43,10 @@ module.exports = {
             for(var i = 0;i<newData.length;i++){
                 var sql = `insert into orderdetalis (ordercode, rank, name, num, price, status) values ('${newData[i].ordercode}', '${newData[i].rank}','${newData[i].name}','${newData[i].num}','${newData[i].price}','${newData[i].status}')`;
                 db.insert(sql, function(data){
-                    // response.send(data);
+                    // responsee.send(data);
                 }) 
-            } 
+            }
+        }) 
 
         //web传送订单
         app.post('/sentWetOrder',function(request,response){
@@ -60,7 +61,7 @@ module.exports = {
         })
         //订单修改
         app.post('/Webdeleted', function(request, response){
-            var sql =`update orderdetalis set status='取消' where name = ${request.body.name}`;
+            var sql =`update orderdetalis set status='取消' where name = '${request.body.name}'`;
             db.update(sql, function(data){
                 response.send(data);
                 console.log(data) 

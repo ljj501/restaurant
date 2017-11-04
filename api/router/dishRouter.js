@@ -4,14 +4,14 @@ module.exports = {
         
         //打开时显示
         app.post('/getDish', function(request, response){
-            var pageSize = 6;
+            var pageSize = 9;
             db.select(`select * from dishname limit ${pageSize}`, 'dishname', function(data){
                 response.send(data);
             })  
         })
         //分页
         app.post('/getTurnPage', function(request, response){
-            var pageSize = 6;
+            var pageSize = 9;
             if(request.body.findClass){
                 var newData = request.body;
                 var sql = `select * from dishname where ${newData.findClass} regexp '${newData.findContent}' limit ${(newData.pageNumber - 1) * pageSize}, ${pageSize} `;
@@ -57,11 +57,7 @@ module.exports = {
         app.post('/addDish', function(request, response){
 
             var newData = request.body;
-            var newOrderTime = newData.time.split('T');
-            newOrderTime[1] =newOrderTime[1].slice(0,-5);
-            var ordertime = newOrderTime.join(' ');
-            console.log(ordertime);
-            var sql = `insert into dishname (name, classify, number, picture, price, time, creatDate, status) values ('${newData.name}', '${newData.classify}','${newData.number}','${newData.picture}','${newData.price}','${ordertime}','${newData.creatDate}','${newData.status}')`;
+            var sql = `insert into dishname (name, classify, number, picture, price, time, creatDate, status) values ('${newData.name}', '${newData.classify}','${newData.number}','${newData.picture}','${newData.price}','${newData.time}','${newData.creatDate}','${newData.status}')`;
             db.insert(sql, function(data){
                 response.send(data);
             })  

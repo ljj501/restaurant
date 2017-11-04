@@ -3,10 +3,10 @@
         <dl>
             <dt v-for="item in arr">
                 <strong :id=item.classify>{{item.classify}}<i>...</i></strong>
-               <dd v-for="obj in dataset" v-if="obj.classify == item.classify">
+               <dd v-for="obj in dataset" v-if="obj.classify == item.classify && obj.status != '已下架'">
                <h4 data-main='name'>{{obj.name}}</h4>
                <i class="imgbox"><img src="../../img/timg.jpg" /></i>
-               <p>飒飒来看拉克丝撒旦啥卡看I我卡死当时发生撒旦撒萨芬</p>
+               <p>客官来吃吗客官来吃吗客官来吃吗客官来吃吗</p>
                <i class="pay">{{obj.price}}</i>
                <div class="operate">
                    <i class="del" @click="del">-</i>
@@ -31,11 +31,14 @@
                 num:0,
                 arr:[],
                 loadingShow: false,
+                i:0
             }
         },
         props: ['api'],
         methods:{   
             add:function(event){
+                this.i++;
+                $('.i').css({'display':'block'}).text(this.i)
                 var father = event.target.parentNode;
                 var del = father.children[0];
                 var number = father.children[1];
@@ -56,6 +59,11 @@
                 }
             },
             del:function(event){
+                this.i--;
+                $('.i').css({'display':'block'}).text(this.i)
+                if(this.i == 0){
+                    $('.i').css({display:'none'})
+                }
                 var father = event.target.parentNode;
                 var number = father.children[1];
                 var add = father.children[2];
@@ -80,7 +88,7 @@
             },
             jj:function(){
                 var self = this;
-                console.log(self.arr)
+                // console.log(self.arr)
                 self.arr = self.$parent.$children[0].dataset;
                 http.post({
                     url: self.api,
@@ -93,9 +101,10 @@
         },
         updated:function(){
             this.arr = this.$parent.$children[0].dataset;
+            console.log(this.arr)
         },
         mounted: function(){
-            console.log(this.api)
+            // console.log(this.api)
             var self = this;
             http.post({
                 url: self.api,

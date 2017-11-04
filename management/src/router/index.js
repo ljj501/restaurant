@@ -14,39 +14,40 @@ Vue.use(VueRouter)
 var router = new VueRouter({
 	routes: [
 		{
-			path: '/',
+			path: '/home',
 			name: '主页',
 			alias: 'home',
 			component: HomeComponent,
 			children: [{
-				path: 'goodslist',
+				path: '/goodslist',
 				name: '菜品管理',
 				alias:'菜品管理',
 				component: GoodsListComponent
 			},{
-				path: 'goodsform',
+				path: '/goodsform',
 				name: '添加菜品',
 				alias: '添加菜品',
 				component: GoodsFormComponent
 			},{
-				path: 'salesorder',
+				path: '/salesorder',
 				name: '销售订单',
 				alias: '销售订单',
 				component: SalesOrderComponent
 			},{
-				path: 'orderdetalis',
+				path: '/orderdetalis',
 				name: '订单详情',
 				alias: '订单详情',
 				component: OrderdetalisComponent
 			},{
-				path: 'dishclass',
+				path: '/dishclass',
 				name: '菜品分类',
 				alias: '菜品分类',
 				component: DishclassComponent
 			}]
-		},
+		}
+		,
 		{
-			path: '/login',
+			path: '/',
 			name: 'login',
 			component: LoginComponent
 		}

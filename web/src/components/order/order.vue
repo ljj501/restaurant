@@ -59,6 +59,7 @@
     import './order.scss'
     import http from '../../utils/httpClient.js'
     import loading from '../loading/loading.vue'
+    import router from  '../../router/'
     var dele;
     var count= 0;
     export default {
@@ -73,6 +74,33 @@
             btnList:false,
             orderData:[]
         }),
+        sockets:{
+            connect:function(){
+                
+            },
+            receiveStatus:function(){
+
+                var self = this;
+                setTimeout(function(){
+                       var Tdata= self.orderData;
+                       for(var i=0;i<Tdata.length;i++){
+                           self.ttotal += Tdata[i].num*Tdata[i].price;
+                       }
+                       http.post({
+                           url: 'Webgetorder',
+                           vm:self
+                       }).then(res => {
+                           self.orderData = res.data[1];
+                           var arry = res.data[1]
+                           for(var i=0;i<arry.length;i++){
+                               if(arry[i].status!='取消'){
+                                   self.ttotal += arry[i].num*arry[i].price;
+                               }
+                           }
+                       })
+                },500)
+            }
+        },
         methods:{
             modifi:function(e){
                 count++;
@@ -137,7 +165,6 @@
             for(var i=0;i<Tdata.length;i++){
                 this.ttotal += Tdata[i].num*Tdata[i].price;
             }
-            console.log(this.ttotal);
             var self = this;
             http.post({
                 url: 'Webgetorder',

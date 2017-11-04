@@ -5,7 +5,7 @@
   "author": "dk.lan <329865849@qq.com>",
   "private": true,
   "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --hot --open",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --hot --open --host 10.3.131.11",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "dependencies": {

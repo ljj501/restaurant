@@ -1,7 +1,7 @@
 <template>
     <div class="navleft">
         <ul >
-            <li v-for="(obj,index) in dataset" @click="active">
+            <li v-for="(obj,index) in dataset" v-if="obj.status != '已下架'" @click="active">
             <a :href="'#'+obj.classify">{{obj.classify}}</a></li>
         </ul>
         <loading v-show="loadingShow"></loading>
@@ -15,7 +15,6 @@
     export default {
         data: function(){
             return {
-                // dataset: [{'id':1,'classify':'米线'},{'id':2,'classify':'米饭'},{'id':3,'classify':'腐竹'},{'id':4,'classify':'大米'},{'id':5,'classify':'河粉'},{'id':6,'classify':'肠粉'},{'id':7,'classify':'豆腐'},{'id':8,'classify':'豆芽'},{'id':9,'classify':'豆干'},{'id':9,'classify':'豆干'}],
                 dataset:[],
                 loadingShow: false,
             }
@@ -39,7 +38,8 @@
             }).then(res => {
                 console.log(self.$parent.$children[1].jj)
                 self.dataset = res.data[1];
-                self.$parent.$children[1].jj();
+                console.log(self.dataset)
+                self.$parent.$children[1].jj()
             })
 
         },

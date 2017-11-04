@@ -4,6 +4,7 @@
             <foodslist api='getWebGoods'></foodslist>
             <div class="footer">
                 <div class="left">
+                    <i class="i">0</i>
                     <i class="car icon-gouwuche iconfont" @click="showlist">
                         <svg class="icon" aria-hidden="true">
                           <use xlink:href="#icon-gouwuche"></use>
@@ -38,11 +39,6 @@
                 dataset:{}
             }
         },
-        sockets: {  
-            connect: function(){  
-              console.log('socket connected')  
-            }
-        },
         methods:{
             yes:function(){
                 if($('.l-cover').length <= 1 ){
@@ -61,6 +57,10 @@
             sockets:{
                 connect: function(){  //这里是监听connect事件
                   this.id=this.$socket.id
+                },
+                receiveStatus:function(data){
+                    console.log(9999);
+                window.location.reload();
                 }
             },
             mounted:function(){
@@ -76,8 +76,10 @@
                 $('.tc').css({'display':'none'});
                 $('.l-cover').remove()
                 $('.box').find('table').remove()
-                router.push('./order')  
                 this.$socket.emit('sendOrder',this.dataset);  
+                setTimeout(function(){   
+                    router.push('./order')  
+                },300)
                 console.log(this.dataset)
             },
             showlist:function(){

@@ -104,6 +104,21 @@ body,html{height:100%;}
         height: 1.3rem;
         color:#fff;
         font-weight:600;
+        .i{
+            position:absolute;
+            width:.5rem;
+            height:.5rem;
+            background:#ff461d;
+            border-radius:50%;
+            line-height:.5rem;
+            top:-.6rem;
+            font-style:normal;
+            text-align:center;
+            left:1.5rem;
+            z-index:100;
+            font-weight:100;
+            display:none;
+        }
         .car{
             position:absolute;
             top:-0.5rem;

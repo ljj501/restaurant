@@ -4,9 +4,9 @@
 	   <el-aside width="200px">
 	   		<div class="logo"><span>点餐系统后台</span></div>
 			<ul>
-				<li @click="crumbs"><span class="el-icon-document"><router-link to="/salesorder">&nbsp;&nbsp;销售订单</router-link></span></li>
-				<li @click="crumbs"><span class="el-icon-share"><router-link to="/dishclass" >&nbsp;&nbsp;菜品分类</router-link></span></li>
-				<li @click="crumbs"><span class="el-icon-menu"><router-link to="/goodslist">&nbsp;&nbsp;菜品管理</router-link></span></li>
+				<li @click="crumbs" class="lj"><span class="el-icon-document" @click="cancelAdd"><router-link to="/salesorder">&nbsp;&nbsp;销售订单</router-link></span></li>
+				<li @click="crumbs" class="lj"><span class="el-icon-share" @click="cancelAdd"><router-link to="/dishclass" >&nbsp;&nbsp;菜品分类</router-link></span></li>
+				<li @click="crumbs" class="lj"><span class="el-icon-menu" @click="resetAdd"><router-link to="/goodslist">&nbsp;&nbsp;菜品管理</router-link></span></li>
 			</ul>
 	   </el-aside>
 	 	<el-container>
@@ -17,7 +17,8 @@
 	    	</el-header>
 	    	<el-main>
 				<div class="toolbar">
-					  <el-button type="primary" @click='addDish' v-if="this.$store.state.show">添加</el-button>
+					  <el-button type="primary" @click='addDish' v-if="addBtn">添加</el-button>
+					  <el-button type="success" @click='backOrder' v-if="this.$store.state.backBtn">返回销售订单</el-button>
 					  <!-- <el-button type="success">修改</el-button>
 					  <el-button type="info">下架</el-button> -->
 					  <div class='z-search' v-if="this.$store.state.show">
@@ -65,10 +66,26 @@
 			  crumbsData:[{name:'主页'}]
 		    }
 		},
+		computed:{
+			addBtn:function(){
+				var a = (this.$store.state.show && this.$store.state.addBtn);
+				return a;
+			}
+		},
 		methods: {
 			addDish:function(){
 				router.push('/goodsform');
 				this.$store.state.show = false;
+			},
+			cancelAdd: function(){
+				this.$store.state.addBtn = false;
+			},
+			resetAdd: function(){
+				this.$store.state.addBtn = true;
+			},
+			backOrder: function(){
+				this.$store.state.backBtn = false;
+				router.push('/salesorder');
 			},
 			crumbs: function(e){	
 					var crumbsArray = [];
@@ -76,6 +93,9 @@
 						crumbsArray.push({name:this.$route.matched[i].name})
 					}
 					this.crumbsData = crumbsArray;
+					$('.lj').addClass('now').siblings().removeClass('now')
+					this.$store.state.backBtn = false;
+					
 			},
 			search:function(){
 				var self = this;
@@ -114,6 +134,15 @@
 					})
 				}
 			}
+		},
+		mounted:function(){
+			
+		    $('.lj').eq(2).addClass('now')
+
+			$('.lj').click(function(){
+				$(this).addClass('now').siblings().removeClass('now');
+			})
+
 		}
 	}
 </script>

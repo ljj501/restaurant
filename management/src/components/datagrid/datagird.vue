@@ -43,7 +43,7 @@
 	    	    </div>
 
 	    	    <div v-else-if="tableName =='orderdetalis'? true : false">
-	    	    	<el-button type="success" size="mini" class="z-detalis" @click="confirm(scope.row)" :disabled="(scope.row.status == '未做' || scope.row.status == '取消') ? scope.row.disable = false : scope.row.disable = true">下厨</el-button>
+	    	    	<el-button type="success" size="mini" class="z-detalis" @click="confirm(scope.row)" :disabled="scope.row.status == '未做' ? scope.row.disable = false : scope.row.disable = true">下厨</el-button>
 	    	    </div>
 
 	    	    <div v-else="tableName =='dishclass'? true : false">
@@ -104,7 +104,7 @@
 			},
 			pageSize:function(){
 				var apiAll = {
-					'getDish':6,
+					'getDish':9,
 					'getOrder':10,
 					'getOrderDetalis':10,
 					'getClassDish':10
@@ -257,6 +257,7 @@
 			},
 			orderDetalis(ordercode) {
 				this.$store.state.orderNo = ordercode;
+				this.$store.state.backBtn = true;
 				router.push('/orderdetalis');
 			},
 			confirm(row){
@@ -270,8 +271,8 @@
 	    	    	params:{id:row.id}
 	    	    }
 	    	    this.showData(opts);
+				this.$socket.emit('Cooked',{name:row.name});
 			}
-
 		},
 		components: {
 			loading,
