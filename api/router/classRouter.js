@@ -21,6 +21,7 @@ module.exports = {
         app.post('/getWebClass', function(request, response){
             db.select(`select * from dishclass`, 'dishclass', function(data){
                 response.send(data);
+                console.log(666)
             })  
         })
 

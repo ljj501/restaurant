@@ -1,0 +1,5 @@
+环境配置:
+step1:在api、management、web三个文件夹下分明npm install
+step2:doc文件下导入数据库表
+step3:api文件下打开命令窗口分别运行 node server 和 node io 
+step4:web跟management文件夹下打开命令窗口输入命令行 npm run dev
